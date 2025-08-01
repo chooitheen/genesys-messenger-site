@@ -5,17 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Genesys Chat Demo</title>
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <script>
+
+<script>
   var password = prompt("Enter password to access this page:");
-  if (password !== "sgen123") {
+  if (password === "sgen123") {
+    // Render HTML content
+    document.write(`
+      <h1>Welcome to My Chat-Enabled Website</h1>
+      <p>This is a demo page to test Genesys Cloud Messenger.</p>
+    `);
+
+    // Dynamically inject Genesys Messenger script
+    (function (g, e, n, es, ys) {
+      g['_genesysJs'] = e;
+      g[e] = g[e] || function () {
+        (g[e].q = g[e].q || []).push(arguments)
+      };
+      g[e].t = 1 * new Date();
+      g[e].c = es;
+      ys = document.createElement('script');
+      ys.async = 1;
+      ys.src = n;
+      ys.charset = 'utf-8';
+      document.head.appendChild(ys);
+    })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
+      environment: 'prod',
+      deploymentId: '44725710-635e-41cc-8427-6cd3c902f13e'
+    });
+
+  } else {
     document.body.innerHTML = "<h2>Unauthorized. Please reload and try again.</h2>";
   }
 </script>
-  <h1>Welcome to My Chat-Enabled Website</h1>
-  <p>This is a demo page to test Genesys Cloud Messenger.</p>
-  <!-- 
+
+</body>
+</html>
+
+ <!-- 
   <div id="chat-box"></div>
   <input id="user-input" type="text" placeholder="Type a message...">
   <button onclick="sendMessage()">Send</button>
@@ -29,37 +63,3 @@
       input.value = '';
     }
   </script>  -->
-
-  <!--  Genesys Messenger Script  
-<script type="text/javascript" charset="utf-8">
-  (function (g, e, n, es, ys) {
-    g['_genesysJs'] = e;
-    g[e] = g[e] || function () {
-      (g[e].q = g[e].q || []).push(arguments)
-    };
-    g[e].t = 1 * new Date();
-    g[e].c = es;
-    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
-  })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
-    environment: 'prod',
-    deploymentId: '561ef76a-d542-4b57-b56e-93ba5af17487'
-  });
-</script> -->
-
-<script type="text/javascript" charset="utf-8">
-  (function (g, e, n, es, ys) {
-    g['_genesysJs'] = e;
-    g[e] = g[e] || function () {
-      (g[e].q = g[e].q || []).push(arguments)
-    };
-    g[e].t = 1 * new Date();
-    g[e].c = es;
-    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
-  })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
-    environment: 'prod',
-    deploymentId: '44725710-635e-41cc-8427-6cd3c902f13e'
-  });
-</script> 
-
-  </body>
-</html>
