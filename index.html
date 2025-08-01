@@ -7,6 +7,12 @@
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
+  <script>
+  var password = prompt("Enter password to access this page:");
+  if (password !== "sgen123") {
+    document.body.innerHTML = "<h2>Unauthorized. Please reload and try again.</h2>";
+  }
+</script>
   <h1>Welcome to My Chat-Enabled Website</h1>
   <p>This is a demo page to test Genesys Cloud Messenger.</p>
   <!-- 
