@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Genesys Chat Demo</title>
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 2rem;
     }
+    #content { display: none; }
+    #unauthorized { display: none; color: red; margin-top: 1rem; }
   </style>
 </head>
 <body>
 
-<script>
-  var password = prompt("Enter password to access this page:");
-  if (password === "sgen123") {
-    // Render HTML content
-    document.write(`
-      <h1>Welcome to My Chat-Enabled Website</h1>
-      <p>This is a demo page to test Genesys Cloud Messenger.</p>
-    `);
+<!-- Login Section -->
+<div id="login">
+  <h2>Enter Password to Access This Page</h2>
+  <input type="password" id="pwdInput" placeholder="Password" />
+  <button onclick="checkPassword()">Submit</button>
+  <p id="unauthorized">Unauthorized. Please try again.</p>
+</div>
 
-    // Dynamically inject Genesys Messenger script
+<!-- Main Content Section (Hidden until password is correct) -->
+<div id="content">
+  <h1>Welcome to My Chat-Enabled Website</h1>
+  <p>This is a demo page to test Genesys Cloud Messenger.</p>
+
+  <!-- Genesys Messenger Script -->
+  <script type="text/javascript" charset="utf-8">
     (function (g, e, n, es, ys) {
       g['_genesysJs'] = e;
       g[e] = g[e] || function () {
@@ -40,26 +47,20 @@
       environment: 'prod',
       deploymentId: '44725710-635e-41cc-8427-6cd3c902f13e'
     });
+  </script>
+</div>
 
-  } else {
-    document.body.innerHTML = "<h2>Unauthorized. Please reload and try again.</h2>";
+<script>
+  function checkPassword() {
+    const input = document.getElementById("pwdInput").value;
+    if (input === "sgen123") {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    } else {
+      document.getElementById("unauthorized").style.display = "block";
+    }
   }
 </script>
 
 </body>
 </html>
-
- <!-- 
-  <div id="chat-box"></div>
-  <input id="user-input" type="text" placeholder="Type a message...">
-  <button onclick="sendMessage()">Send</button>
-
-  <script>
-    function sendMessage() {
-      const input = document.getElementById('user-input');
-      const message = input.value;
-      document.getElementById('chat-box').innerHTML += "<p>You: " + message + "</p>";
-      // Here you'd call your chat API
-      input.value = '';
-    }
-  </script>  -->
